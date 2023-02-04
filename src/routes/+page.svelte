@@ -1,14 +1,35 @@
+<script>
+	import { onMount } from 'svelte';
+
+	//on screen sizes smaller than 768px change the src of the image to the mobile version
+	onMount(() => {
+		const image = document.querySelector('img');
+		const mediaQuery = window.matchMedia('(max-width: 768px)');
+		const changeImage = (e) => {
+			if (e.matches) {
+				image.src = '/images/image-product-mobile.jpg';
+			} else {
+				image.src = '/images/image-product-desktop.jpg';
+			}
+		};
+		mediaQuery.addEventListener('change', changeImage);
+		changeImage(mediaQuery);
+	});
+</script>
+
 <svelte:head>
 	<title>Product Preview Card</title>
 	<link rel="icon" type="image/png" href="/favicon-32x32.png" />
 </svelte:head>
 
-<main class="flex justify-center items-center w-screen h-screen bg-cream">
-	<div class="flex w-[700px] h-[500px]">
-		<div class="overflow-hidden rounded-l-xl">
+<main class="flex justify-center items-center w-screen h-screen -md:h-max -md:my-20 bg-cream">
+	<div class="flex w-[700px] h-[500px] -md:block -md:w-[300px]">
+		<div class="overflow-hidden rounded-l-xl -md:w-[300px] -md:rounded-l-none -md:rounded-t-xl">
 			<img src="/images/image-product-desktop.jpg" class="" alt="Top down of a bottle of perfume" />
 		</div>
-		<div class="bg-white rounded-r-xl p-8 flex flex-col justify-end w-[400px]">
+		<div
+			class="bg-white rounded-r-xl -md:rounded-r-none -md:rounded-b-xl p-8 flex flex-col justify-end w-[400px] -md:w-[300px]"
+		>
 			<p class="tracking-[0.3em] font-montserrat text-dark-grayish-blue text-xs mb-4">PERFUME</p>
 			<h2 class="font-fraunces text-3xl text-very-dark-blue mb-6">
 				Gabrielle<br />
